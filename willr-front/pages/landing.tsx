@@ -42,21 +42,21 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax responsive filter image="/img/pattern-2-bg.jpg">
+      <Parallax
+        responsive
+        image="/img/illustrations/backgroundPatternLanding.svg"
+      >
         <div className={classes.container}>
-          <GridContainer>
+          <GridContainer justify="flex-start">
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Willr.io</h1>
+              <h1 className={classes.title}>Willr</h1>
               <h3>
-                Willr is a digital platform that enables users to securely
-                transfer their digital assets to future beneficiaries through
-                smart contracts.
+                Enables users to securely transfer their digital assets to
+                future beneficiaries through smart contracts.
               </h3>
               <br />
               <Link href="/connect" as="/connect">
-                <Button color="primary" size="lg">
-                  APP
-                </Button>
+                <Button color="primary">Get Started</Button>
               </Link>
             </GridItem>
           </GridContainer>

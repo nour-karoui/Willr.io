@@ -29,7 +29,7 @@ export default function WillAppPage(props) {
         }}
         {...rest}
       />
-      <Parallax small filter image="/img/pattern-2-bg.jpg" />
+      <Parallax small image="/img/illustrations/backgroundPatternWillApp.svg" />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
@@ -37,7 +37,6 @@ export default function WillAppPage(props) {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

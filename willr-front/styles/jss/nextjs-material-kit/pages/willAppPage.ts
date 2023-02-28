@@ -38,7 +38,7 @@ const willAppPageStyle = {
     ...title,
     display: "inline-block",
     position: "relative",
-    marginTop: "30px",
+    margin: "30px",
     minHeight: "32px",
     textDecoration: "none",
   },

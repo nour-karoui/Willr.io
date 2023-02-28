@@ -7,9 +7,7 @@ const updateWillPageStyle = {
     position: "relative",
     paddingTop: "20vh",
     color: "#FFFFFF",
-    "@media (max-width: 904px)": {
-      paddingBottom: "200px",
-    },
+    paddingBottom: "200px",
   },
   cardHidden: {
     opacity: "0",
@@ -25,7 +23,7 @@ const updateWillPageStyle = {
     border: "0",
     alignItems: "center",
     "&:before": {
-      background: "rgba(0, 0, 0, 0.5)",
+      background: "rgba(0, 0, 0, 0.1)",
     },
     "&:before,&:after": {
       position: "absolute",

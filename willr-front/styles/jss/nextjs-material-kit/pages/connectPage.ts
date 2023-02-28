@@ -5,8 +5,9 @@ const connectPageStyle = {
     ...container,
     zIndex: "2",
     position: "relative",
-    paddingTop: "20vh",
+    paddingTop: "25vh",
     "@media (max-width: 904px)": {
+      paddingTop: "10vh",
       paddingBottom: "200px",
     },
   },
@@ -16,7 +17,7 @@ const connectPageStyle = {
   },
   imgFluid: {
     maxWidth: "100%",
-    height: "auto",
+    height: "100%",
   },
   pageHeader: {
     minHeight: "100vh",
@@ -27,6 +28,12 @@ const connectPageStyle = {
     padding: "0",
     border: "0",
     alignItems: "center",
+    backgroundImage: "url('/img/illustrations/backgroundLightLarge.svg')",
+    "@media (max-width: 904px)": {
+      backgroundImage: "url('/img/illustrations/backgroundLightSmall.svg')",
+    },
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
 
     "&:before,&:after": {
       position: "absolute",
