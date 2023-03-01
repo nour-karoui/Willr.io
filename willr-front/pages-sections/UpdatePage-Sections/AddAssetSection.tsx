@@ -7,8 +7,6 @@ import Button from "../../components/CustomButtons/Button";
 // core components
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Email from "@material-ui/icons";
 import CustomInput from "../../components/CustomInput/CustomInput";
 
 import styles from "../../styles/jss/nextjs-material-kit/pages/updatePageSections/emailWillSectionsStyle";
