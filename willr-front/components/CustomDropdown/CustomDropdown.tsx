@@ -44,38 +44,24 @@ export default function CustomDropdown(props: CustomDropdownProps) {
   };
   const classes = useStyles();
   const {
-    buttonText,
-    buttonIcon,
     dropdownList,
     buttonProps,
     dropup,
     dropdownHeader,
-    caret,
     hoverColor,
     left,
     rtlActive,
     noLiPadding,
     navDropdown,
   } = props;
-  const caretClasses = classNames({
-    [classes.caret]: true,
-    [classes.caretActive]: Boolean(anchorEl),
-    [classes.caretRTL]: rtlActive,
-  });
+
   const dropdownItem = classNames({
     [classes.dropdownItem]: true,
     [classes[(hoverColor || "primary") + "Hover"]]: true,
     [classes.noLiPadding]: noLiPadding,
     [classes.dropdownItemRTL]: rtlActive,
   });
-  let icon: JSX.Element | null = null;
-  if (buttonIcon) {
-    if (typeof buttonIcon === "string") {
-      icon = <Icon className={classes.buttonIcon}>{props.buttonIcon}</Icon>;
-    } else {
-      icon = <props.buttonIcon className={classes.buttonIcon} />;
-    }
-  }
+
   return (
     <div>
       <div>
@@ -86,9 +72,7 @@ export default function CustomDropdown(props: CustomDropdownProps) {
           {...buttonProps}
           onClick={handleClick}
         >
-          {icon}
-          {buttonText !== undefined ? buttonText : null}
-          {caret ? <b className={caretClasses} /> : null}
+          <i className="fa fa-user" />
         </Button>
       </div>
       <Popper
@@ -97,7 +81,13 @@ export default function CustomDropdown(props: CustomDropdownProps) {
         transition
         disablePortal
         placement={
-          dropup ? (left ? "top-end" : "top") : left ? "bottom-end" : "bottom"
+          dropup
+            ? left
+              ? "bottom-end"
+              : "bottom-end"
+            : left
+            ? "bottom-end"
+            : "bottom-end"
         }
         className={classNames({
           [classes.popperClose]: !anchorEl,

@@ -52,7 +52,7 @@ export default function Header(props: HeaderProps) {
       }
     }
   };
-  const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
+  const { color, profileMenu, brand, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color || "primary"]]: color,
@@ -67,18 +67,8 @@ export default function Header(props: HeaderProps) {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        {leftLinks !== undefined ? brandComponent : null}
-        <div className={classes.flex}>
-          {leftLinks !== undefined ? (
-            <Hidden smDown implementation="css">
-              {leftLinks}
-            </Hidden>
-          ) : (
-            brandComponent
-          )}
-        </div>
-
-        {rightLinks !== undefined ? rightLinks : null}
+        {brandComponent}
+        {profileMenu !== undefined ? profileMenu : null}
       </Toolbar>
     </AppBar>
   );
@@ -96,8 +86,7 @@ export interface HeaderProps {
     | "white"
     | "rose"
     | "dark";
-  rightLinks?: ReactElement;
-  leftLinks?: ReactElement;
+  profileMenu?: ReactElement;
   brand: string;
   fixed?: boolean;
   absolute?: boolean;

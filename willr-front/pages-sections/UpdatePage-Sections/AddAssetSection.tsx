@@ -12,13 +12,14 @@ import Email from "@material-ui/icons";
 import CustomInput from "../../components/CustomInput/CustomInput";
 
 import styles from "../../styles/jss/nextjs-material-kit/pages/updatePageSections/emailWillSectionsStyle";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 export default function AddAssetSection() {
   const classes = useStyles();
   return (
-    <div className={classes.section}>
+    <Paper className={classes.section}>
       <GridContainer justifyContent="center" align="center" spacing={4}>
         <GridItem>
           <h3 className={classes.title}>Inheritor and Assets</h3>
@@ -119,6 +120,6 @@ export default function AddAssetSection() {
           </Link>
         </GridItem>
       </GridContainer>
-    </div>
+    </Paper>
   );
 }

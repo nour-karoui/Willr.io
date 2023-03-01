@@ -12,13 +12,14 @@ import Email from "@material-ui/icons/Email";
 import CustomInput from "../../components/CustomInput/CustomInput";
 
 import styles from "../../styles/jss/nextjs-material-kit/pages/updatePageSections/emailWillSectionsStyle";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 export default function EmailWillSection() {
   const classes = useStyles();
   return (
-    <div className={classes.section}>
+    <Paper className={classes.section}>
       <GridContainer justifyContent="center" align="center" spacing={4}>
         <GridItem>
           <h3 className={classes.title}>Create Your Will Contract</h3>
@@ -50,7 +51,7 @@ export default function EmailWillSection() {
         </GridItem>
 
         <GridItem>
-          <Link href="/updatewill" as="/updatewill">
+          <Link href="/willapp" as="/willapp">
             <Button color={"primary"} className={classes.button}>
               <i className={`fa fa-newspaper ${classes.icon}`} /> Add Digital
               Assets
@@ -63,6 +64,6 @@ export default function EmailWillSection() {
           </Link>
         </GridItem>
       </GridContainer>
-    </div>
+    </Paper>
   );
 }

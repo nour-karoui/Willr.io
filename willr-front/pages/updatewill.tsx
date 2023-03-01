@@ -31,9 +31,9 @@ export default function UpdateWillPage(props) {
       >
         <div className={classes.container}>
           <GridContainer justifyContent="center">
-            <GridItem xs={12} md={6} lg={4}>
-              {/* <EmailWillSection /> */}
-              <AddAssetSection />
+            <GridItem xs={12} md={8} lg={6}>
+              <EmailWillSection />
+              {/* <AddAssetSection /> */}
             </GridItem>
           </GridContainer>
         </div>

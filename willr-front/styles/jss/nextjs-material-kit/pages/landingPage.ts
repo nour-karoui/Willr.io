@@ -2,7 +2,7 @@ import { container, title } from "../../nextjs-material-kit";
 
 const landingPageStyle = {
   container: {
-    zIndex: "12",
+    zIndex: "50",
     color: "#FFFFFF",
     ...container,
   },
@@ -30,6 +30,22 @@ const landingPageStyle = {
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+  },
+  pageHeader: {
+    minHeight: "100vh",
+    height: "auto",
+    display: "inherit",
+    position: "relative",
+    margin: "0",
+    padding: "0",
+    border: "0",
+    alignItems: "center",
+    backgroundImage: "url('/img/illustrations/backgroundLightLarge.svg')",
+    "@media (max-width: 904px)": {
+      backgroundImage: "url('/img/illustrations/backgroundLightSmall.svg')",
+    },
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
   },
 };
 

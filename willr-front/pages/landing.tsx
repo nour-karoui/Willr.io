@@ -42,34 +42,36 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax
-        responsive
-        image="/img/illustrations/backgroundPatternLanding.svg"
-      >
-        <div className={classes.container}>
-          <GridContainer justify="flex-start">
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Willr</h1>
-              <h3>
-                Enables users to securely transfer their digital assets to
-                future beneficiaries through smart contracts.
-              </h3>
-              <br />
-              <Link href="/connect" as="/connect">
-                <Button color="primary">Get Started</Button>
-              </Link>
-            </GridItem>
-          </GridContainer>
+      <div className={classes.pageHeader}>
+        <Parallax
+          responsive
+          image="/img/illustrations/backgroundPatternLanding.svg"
+        >
+          <div className={classes.container}>
+            <GridContainer justify="flex-start">
+              <GridItem xs={12} sm={12} md={6}>
+                <h1 className={classes.title}>Willr</h1>
+                <h3>
+                  Enables users to securely transfer their digital assets to
+                  future beneficiaries through smart contracts.
+                </h3>
+                <br />
+                <Link href="/connect" as="/connect">
+                  <Button color="primary">Get Started</Button>
+                </Link>
+              </GridItem>
+            </GridContainer>
+          </div>
+        </Parallax>
+        <div className={classNames(classes.main, classes.mainRaised)}>
+          <div className={classes.container}>
+            <ProductSection />
+            <TeamSection />
+            <WorkSection />
+          </div>
         </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <ProductSection />
-          <TeamSection />
-          <WorkSection />
-        </div>
+        <Footer whiteFont />
       </div>
-      <Footer />
     </div>
   );
 }

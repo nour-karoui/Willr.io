@@ -1,61 +1,63 @@
-import { container, title } from "../../nextjs-material-kit";
-
-import imagesStyle from "../imagesStyles";
+import { container } from "../../nextjs-material-kit";
 
 const willAppPageStyle = {
   container,
-  profile: {
-    textAlign: "center",
-    "& img": {
-      maxWidth: "160px",
-      width: "100%",
-      margin: "0 auto",
-      transform: "translate3d(0, -50%, 0)",
-    },
+  containerDetails: {
+    height: "70%",
   },
-  description: {
-    margin: "1.071rem auto 0",
-    maxWidth: "600px",
-    color: "#999",
-    textAlign: "center !important",
+  containerBalance: {
+    height: "100%",
   },
-  name: {
-    marginTop: "-80px",
+  title: {
+    color: "#FFFFFF",
   },
-  ...imagesStyle,
-  main: {
+  icon: {
+    color: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconPointer: {
+    cursor: "pointer",
+  },
+  containerIcons: {
+    marginBottom: "-0.5rem",
+  },
+  assetListPaper: {
     background: "#FFFFFF",
     position: "relative",
     zIndex: "3",
-  },
-  mainRaised: {
-    margin: "-60px 30px 0px",
-    borderRadius: "6px",
+    margin: "-60px 0px 60px 0px",
+    padding: "24px 48px",
+    borderRadius: "28px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
   },
-  title: {
-    ...title,
-    display: "inline-block",
+  assetItem: {
+    marginBlock: "0.6rem",
+  },
+  toolTip: {
+    backgroundColor: "white",
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow:
+      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+    fontSize: 11,
+  },
+  pageHeader: {
+    minHeight: "100vh",
+    height: "auto",
+    display: "inherit",
     position: "relative",
-    margin: "30px",
-    minHeight: "32px",
-    textDecoration: "none",
-  },
-  socials: {
-    marginTop: "0",
-    width: "100%",
-    transform: "none",
-    left: "0",
-    top: "0",
-    height: "100%",
-    lineHeight: "41px",
-    fontSize: "20px",
-    color: "#999",
-  },
-  navWrapper: {
-    margin: "20px auto 50px auto",
-    textAlign: "center",
+    margin: "0",
+    padding: "0",
+    border: "0",
+    alignItems: "center",
+    backgroundImage: "url('/img/illustrations/backgroundLightLarge.svg')",
+    "@media (max-width: 904px)": {
+      backgroundImage: "url('/img/illustrations/backgroundLightSmall.svg')",
+    },
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
   },
 };
 

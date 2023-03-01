@@ -1,0 +1,31 @@
+[debug] [2023-03-01T04:04:25.528Z] ----------------------------------------------------------------------
+[debug] [2023-03-01T04:04:25.531Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\bruno\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-03-01T04:04:25.532Z] CLI Version:   11.22.0
+[debug] [2023-03-01T04:04:25.533Z] Platform:      win32
+[debug] [2023-03-01T04:04:25.533Z] Node Version:  v16.16.0
+[debug] [2023-03-01T04:04:25.535Z] Time:          Wed Mar 01 2023 01:04:25 GMT-0300 (Brasilia Standard Time)
+[debug] [2023-03-01T04:04:25.535Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-03-01T04:04:25.682Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-03-01T04:04:25.683Z] > authorizing via signed-in user (brunovjk@gmail.com)
+[debug] [2023-03-01T04:04:25.683Z] [iam] checking project willr-6cdd9 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-03-01T04:04:25.687Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/willr-6cdd9:testIamPermissions [none]
+[debug] [2023-03-01T04:04:25.688Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/willr-6cdd9:testIamPermissions x-goog-quota-user=projects/willr-6cdd9
+[debug] [2023-03-01T04:04:25.688Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/willr-6cdd9:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-03-01T04:04:26.692Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/willr-6cdd9:testIamPermissions 200
+[debug] [2023-03-01T04:04:26.693Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/willr-6cdd9:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-03-01T04:04:26.695Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/willr-6cdd9 [none]
+[debug] [2023-03-01T04:04:27.160Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/willr-6cdd9 200
+[debug] [2023-03-01T04:04:27.160Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/willr-6cdd9 {"projectId":"willr-6cdd9","projectNumber":"824845637253","displayName":"willr","name":"projects/willr-6cdd9","resources":{"hostingSite":"willr-6cdd9"},"state":"ACTIVE","etag":"1_944aeab4-d711-4b3d-91f0-e2b88af042d1"}
+[debug] [2023-03-01T04:04:40.230Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/willr-6cdd9/sites pageToken=&pageSize=10
+[debug] [2023-03-01T04:04:41.375Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/willr-6cdd9/sites 200
+[debug] [2023-03-01T04:04:41.376Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/willr-6cdd9/sites {"sites":[{"name":"projects/willr-6cdd9/sites/willr-6cdd9","defaultUrl":"https://willr-6cdd9.web.app","appId":"1:824845637253:web:1a453419384824b62afbec","type":"DEFAULT_SITE"}]}
+[debug] [2023-03-01T04:04:41.377Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:824845637253:web:1a453419384824b62afbec/config [none]
+[debug] [2023-03-01T04:04:42.654Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:824845637253:web:1a453419384824b62afbec/config 200
+[debug] [2023-03-01T04:04:42.654Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:824845637253:web:1a453419384824b62afbec/config {"projectId":"willr-6cdd9","appId":"1:824845637253:web:1a453419384824b62afbec","storageBucket":"willr-6cdd9.appspot.com","apiKey":"AIzaSyDCAgsC5DNhx7qX2ogtOoQSQh3GjXB6umI","authDomain":"willr-6cdd9.firebaseapp.com","messagingSenderId":"824845637253","measurementId":"G-SBTVWHBPBZ"}
+[debug] [2023-03-01T04:05:50.021Z] TypeError: Cannot read properties of null (reading 'toString')
+    at ɵcodegenFunctionsDirectory (C:\Users\bruno\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:222:18)
+    at async prepareFrameworks (C:\Users\bruno\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:306:84)
+    at async deploy (C:\Users\bruno\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.
