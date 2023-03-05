@@ -1,3 +1,6 @@
 .idea
 willr-front/node_modules
+willr-blockchain/.gradle
+willr-blockchain/keystore.json
+willr-blockchain/willr.io/build
 
