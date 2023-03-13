@@ -3,5 +3,21 @@ willr-front/node_modules
 willr-blockchain/.gradle
 willr-blockchain/keystore.json
 willr-blockchain/willr.io/build
+
 goloop
+
+willr-contracts/.gradle
+willr-contracts/.idea
+willr-contracts/build
+willr-contracts/out
+willr-contracts/hello-world
+willr-contracts/irc2-token
+willr-contracts/irc3-token
+willr-contracts/irc31-token
+willr-contracts/multisig-wallet
+willr-contracts/sample-crowdsale
+willr-contracts/sample-token
+willr-contracts/testinteg
+
+willr-contracts/keystore.json
 
