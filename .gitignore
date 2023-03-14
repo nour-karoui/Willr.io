@@ -2,9 +2,16 @@
 goloop
 .idea
 
-willr-blockchain/.gradle
-willr-blockchain/keystore.json
-willr-blockchain/willr.io/build
+willr-blockchain/
+
+willr-contracts/hello-world
+willr-contracts/irc2-token
+willr-contracts/irc3-token
+willr-contracts/irc31-token
+willr-contracts/multisig-wallet
+willr-contracts/sample-crowdsale
+willr-contracts/sample-token
+willr-contracts/testinteg
 
 
 
