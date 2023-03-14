@@ -1,0 +1,28 @@
+codecov:
+  require_ci_to_pass: true
+
+comment:
+  behavior: default
+  layout: "reach, diff, flags, files"
+
+ignore:
+  - "**/test_*"
+  - "**/*_test.*"
+  - "**/mocks/*"
+  - "**/mock/*"
+
+coverage:
+  precision: 2
+  range: 50..80
+  round: down
+  status:
+    project: no
+    patch:
+      default:
+        target: auto
+        threshold: 3%
+        base: auto
+    changes: no
+
+github_checks:
+  annotations: false
