@@ -1,29 +1,42 @@
 package com.iconloop.score;
 
-import com.iconloop.score.Will;
-import score.Context;
-import score.annotation.External;
-import score.annotation.Payable;
 import score.Address;
+import score.Context;
 import score.DictDB;
-import score.VarDB;
+import score.annotation.External;
 
 public class WillFactory {
-    private final VarDB<Integer> willCount = Context.newVarDB("willCount", Integer.class);
-    private final DictDB<Address, Will> wills = Context.newDictDB("wills", Will.class);
-
-    public WillFactory() {}
+    private DictDB<String, Address> wills = Context.newDictDB("wills", Address.class);
 
     @External
-    public void addWill(String email) {
-        Context.require(wills.get(Context.getCaller()) == null);
-        Will will = new Will(email, Context.getCaller());
-        wills.set(Context.getCaller(), will);
-        willCount.set(willCount.get() + 1);
+    public Address createNewWill(String email, byte[] jarBytes) {
+        Will will = new Will(email, Context.getOrigin());
+        Address willAddress = Context.deploy(jarBytes, will);
+        wills.set(email, willAddress);
+        return willAddress;
+    }
+    
+
+    @External(readonly=true)
+    public Address getWill(String email) {
+        return wills.get(email);
     }
 
-    // @External(readonly=true)
-    // public Object getWill(Address address) {
-    //     return wills.get(address);
+    // // backend system to retrieve email addresses and send reminder emails
+    // public void sendReminderEmails() {
+    //     // retrieve all email addresses from the mapping
+    //     for (String email : wills.keySet()) {
+        //
+    //         // send reminder email to the owner
+    //         sendEmail(email, "Reminder: Please update your Will details");
+    //     }
     // }
+
+    // // dummy function to simulate sending an email
+    // private void sendEmail(String toEmail, String message) {
+    //     System.out.println("Sending email to " + toEmail + ": " + message);
+    // }
+
 }
+
+

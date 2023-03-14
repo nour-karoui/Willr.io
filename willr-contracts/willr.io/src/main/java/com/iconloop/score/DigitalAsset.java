@@ -1,17 +1,19 @@
 package com.iconloop.score;
+
 public class DigitalAsset {
-    private String name;
-    private String value;
-    public DigitalAsset(String name, String value) {
-        this.name = name;
-        this.value = value;
+    private String tokenAddress;
+    private int tokenIdOrAmount;
+
+    public DigitalAsset(String tokenAddress, int tokenIdOrAmount) {
+        this.tokenAddress = tokenAddress;
+        this.tokenIdOrAmount = tokenIdOrAmount;
     }
 
-  public String getName() {
-    return this.name;
-  }
+    public String getTokenAddress() {
+        return this.tokenAddress;
+    }
 
-  public String getValue() {
-    return this.value;
-  }
+    public int getTokenIDorAmount() {
+        return this.tokenIdOrAmount;
+    }
 }
