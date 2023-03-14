@@ -1,13 +1,13 @@
+.vscode
+goloop
 .idea
-willr-front/node_modules
+
 willr-blockchain/.gradle
 willr-blockchain/keystore.json
 willr-blockchain/willr.io/build
 
-goloop
 
-willr-contracts/.gradle
-willr-contracts/.idea
 
-willr-contracts/keystore.json
+
+
 

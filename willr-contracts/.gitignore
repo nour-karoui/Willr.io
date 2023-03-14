@@ -2,3 +2,14 @@
 .idea
 build
 out
+
+keystore.json
+
+hello-world
+irc2-token
+irc3-token
+irc31-token
+multisig-wallet
+sample-crowdsale
+sample-token
+testinteg
