@@ -1,0 +1,56 @@
+package com.iconloop.score;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import score.Address;
+import score.Context;
+
+class WillFactoryTest {
+
+    private WillFactory factory;
+    private byte[] willContractBytecode;
+
+    @BeforeEach
+    void setUp() {
+        factory = new WillFactory();
+        willContractBytecode = new byte[]{0x12, 0x34, 0x56}; // Sample bytecode
+        Context.setOrigin(Address.fromString("cx0000000000000000000000000000000000000000"));
+        Context.setCaller(Address.fromString("cx1111111111111111111111111111111111111111"));
+    }
+
+    @Test
+    void createNewWill() {
+        Address willAddress = factory.createNewWill("test@example.com", willContractBytecode);
+        assertNotNull(willAddress);
+        assertEquals(willAddress, factory.getWill("test@example.com"));
+    }
+
+    @Test
+    void getWill() {
+        Address willAddress = factory.createNewWill("test@example.com", willContractBytecode);
+        assertEquals(willAddress, factory.getWill("test@example.com"));
+        assertNull(factory.getWill("nonexistent@example.com"));
+    }
+
+    @Test
+    void sendReminderEmails() {
+        // Set up test data
+        factory.createNewWill("test1@example.com", willContractBytecode);
+        factory.createNewWill("test2@example.com", willContractBytecode);
+
+        // Mock the sendEmail method
+        factory.sendEmail = (toEmail, message) -> {};
+
+        // Call the method and assert that the event was logged
+        factory.sendReminderEmails();
+        assertTrue(Context.getLog().stream()
+                .anyMatch(log -> log.getIndexed().get(0).equals("test1@example.com")
+                        && log.getIndexed().get(1).equals("Reminder: Please update your Will details")));
+        assertTrue(Context.getLog().stream()
+                .anyMatch(log -> log.getIndexed().get(0).equals("test2@example.com")
+                        && log.getIndexed().get(1).equals("Reminder: Please update your Will details")));
+    }
+}
