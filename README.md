@@ -1,59 +1,16 @@
-https://docs.icon.community/getting-started/how-to-write-a-smart-contract
+## Willr.io
 
-./gradlew build
+`sendInherits` from `Will.java` and `sendReminderEmails` from `WillFactory.java` TODO
 
-./gradlew optimizedJar
-
-GOLOOP_ROOT=/path/to/goloop
-
-$GOLOOP_ROOT/bin/goloop rpc sendtx deploy ./willr.io/build/libs/willr.io-0.1.0-optimized.jar \
-    --uri https://lisbon.net.solidwallet.io/api/v3 \
-    --key_store /home/bruno/repos/Willr.io/willr-contracts/keystore.json --key_password gochain \
-    --nid 2 --step_limit 10000000000 \
-    --content_type application/java \    
-"0x2251df1a1d799f6f4df6281c723e7cdaa4437994e2e3717d8c9ce0c076b8a0ba"
-
-$GOLOOP_ROOT/bin/goloop rpc txresult 0x2251df1a1d799f6f4df6281c723e7cdaa4437994e2e3717d8c9ce0c076b8a0ba \
-    --uri https://lisbon.net.solidwallet.io/api/v3
-{
-"to": "cx0000000000000000000000000000000000000000",
-"cumulativeStepUsed": "0x3d53af41",
-"stepUsed": "0x3d53af41",
-"stepPrice": "0x2e90edd00",
-"eventLogs": [],
-"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-"status": "0x1",
-"scoreAddress": "cxe99c7068597cb9a313a33c1a1effc87f5a6d1377",
-"blockHash": "0xc2ef771d28f8932828d41e96ba68a6d52b7e81684eae8861f3af76c95959450a",
-"blockHeight": "0x132d5dc",
-"txIndex": "0x1",
-"txHash": "0x2251df1a1d799f6f4df6281c723e7cdaa4437994e2e3717d8c9ce0c076b8a0ba"
-}
-
-$GOLOOP_ROOT/bin/goloop rpc sendtx call --to cxe99c7068597cb9a313a33c1a1effc87f5a6d1377 \
-    --uri https://lisbon.net.solidwallet.io/api/v3 \
-    --key_store /home/bruno/repos/Willr.io/willr-contracts/keystore.json --key_password gochain \
-    --nid 2 --step_limit 10000000000 \
-    --method addWill \
-    --param email="brunovjk@gmail.com"
-"0x1304d937f41b85bc6a1aa86b5379e57b68de9ccf91b7bd07886368367f992ac7"
-
-$GOLOOP_ROOT/bin/goloop rpc txresult 0x1304d937f41b85bc6a1aa86b5379e57b68de9ccf91b7bd07886368367f992ac7 \
-    --uri https://lisbon.net.solidwallet.io/api/v3
-{
-  "to": "cxe99c7068597cb9a313a33c1a1effc87f5a6d1377",
-  "cumulativeStepUsed": "0x25668",
-  "stepUsed": "0x25668",
-  "stepPrice": "0x2e90edd00",
-  "eventLogs": [],
-  "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-  "status": "0x0",
-  "failure": {
-    "code": "0x1",
-    "message": "UnknownFailure"
-  },
-  "blockHash": "0xeede7eeb344b0998799064cdc6c56b48e010e96573c9e791bdb90aa37d41b8da",
-  "blockHeight": "0x132d688",
-  "txIndex": "0x1",
-  "txHash": "0x1304d937f41b85bc6a1aa86b5379e57b68de9ccf91b7bd07886368367f992ac7"
-}
+> Task :willr.io:compileJava FAILED
+/home/bruno/repos/Willr.io/willr-contracts/willr.io/src/main/java/com/iconloop/score/WillFactory.java:54: error: cannot find symbol
+        for (String email : wills.keys()) {
+                                 ^
+  symbol:   method keys()
+  location: variable wills of type DictDB<String,Address>
+/home/bruno/repos/Willr.io/willr-contracts/willr.io/src/main/java/com/iconloop/score/Will.java:96: error: cannot find symbol
+        for (Address inherit : inherits.keys()) {
+                                       ^
+  symbol:   method keys()
+  location: variable inherits of type DictDB<Address,DigitalAsset[]>
+2 errors
