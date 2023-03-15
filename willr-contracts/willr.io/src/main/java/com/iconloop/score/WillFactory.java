@@ -1,6 +1,7 @@
 package com.iconloop.score;
 
 import score.Address;
+import score.ArrayDB;
 import score.Context;
 import score.DictDB;
 import score.annotation.External;
@@ -12,6 +13,9 @@ import score.annotation.EventLog;
  */
 public class WillFactory {
 
+    // Array of email will.
+    public ArrayDB<String> emailList = Context.newArrayDB("emailList", String.class);
+    // Mapping of wills information.
     private DictDB<String, Address> wills = Context.newDictDB("wills", Address.class);
 
     /**
@@ -25,6 +29,7 @@ public class WillFactory {
     public Address createNewWill(String email, byte[] jarBytes) {
         Will will = new Will(email, Context.getOrigin());
         Address willAddress = Context.deploy(jarBytes, will);
+        emailList.add(email);
         wills.set(email, willAddress);
 
         // Log Will manufactured event
@@ -46,17 +51,17 @@ public class WillFactory {
 
     /**
      * Backend system to retrieve email addresses and send reminder emails to owners
-     * of
-     * Will contracts to update their Will details.
+     * of Will contracts to update their Will details.
      */
     public void sendReminderEmails() {
         // Retrieve all email addresses from the mapping
-        // for (String email : wills.keys()) {
-        //     // Send Checker email to the owner
-        //     sendEmail(email, "Reminder: Please update your Will details");
-        //     // Log Sent event
-        //     EmailSent(email);
-        // }
+        for (int i = 0; i < emailList.size(); i++) {
+            String email = emailList.get(i);
+            // Send Checker email to the owner
+            sendEmail(email, "Reminder: Please update your Will details");
+            // Log Sent event
+            EmailSent(email);
+        }
     }
 
     /**

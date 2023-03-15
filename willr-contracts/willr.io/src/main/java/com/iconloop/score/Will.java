@@ -1,6 +1,7 @@
 package com.iconloop.score;
 
 import score.Address;
+import score.ArrayDB;
 import score.DictDB;
 import score.Context;
 import score.annotation.External;
@@ -14,11 +15,13 @@ import score.annotation.EventLog;
 public class Will {
 
     // Email address of the owner of the will.
-    private String email;
+    public String email;
     // Address of the owner of the will.
-    private Address owner;
-    // Dictionary of inheritance information.
-    private DictDB<Address, DigitalAsset[]> inherits = Context.newDictDB("inherits", DigitalAsset[].class);
+    public Address owner;
+    // Array of inheritors address.
+    public ArrayDB<Address> inheritors = Context.newArrayDB("inheritors", Address.class);
+    // Mapping of inheritance information.
+    public DictDB<Address, DigitalAsset[]> inherits = Context.newDictDB("inherits", DigitalAsset[].class);
 
     /**
      * Constructor for creating a new will object with the specified email address
@@ -66,6 +69,8 @@ public class Will {
                     asset.getTokenAddress(),
                     asset.getTokenIdOrAmount());
         }
+        // Increase inheritors counting.
+        inheritors.add(inherit);
         // Set the inheritance information for the beneficiary.
         inherits.set(inherit, assets);
         // Log the set inherit event.
@@ -93,19 +98,22 @@ public class Will {
         Context.require(Context.getCaller().equals(this.owner));
         // Iterate over the inheritance information and transfer the digital assets to
         // the specified beneficiaries.
-        // for (Address inherit : inherits.keys()) {
-        //     DigitalAsset[] assets = inherits.get(inherit);
-        //     for (DigitalAsset asset : assets) {
-        //         Context.call(
-        //                 inherit,
-        //                 "transfer",
-        //                 Context.getAddress(),
-        //                 asset.getTokenAddress(),
-        //                 asset.getTokenIdOrAmount());
-        //     }
-        //     // Log the sent inherit event.
-        //     InheritSent(this.owner, inherit, assets);
-        // }
+        for (int i = 0; i < inheritors.size(); i++) {
+            Address inherit = inheritors.get(i);
+            DigitalAsset[] assets = inherits.get(inherit);
+            for (DigitalAsset asset : assets) {
+                Context.call(
+                        inherit,
+                        "transfer",
+                        Context.getAddress(),
+                        asset.getTokenAddress(),
+                        asset.getTokenIdOrAmount());
+            }
+            // Log the sent inherit event.
+            InheritSent(this.owner, inherit, assets);
+        }
+        // Reset inheritors counting.
+        inheritors = Context.newArrayDB("inheritors", Address.class);
     }
 
     // Event logs
