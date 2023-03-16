@@ -6,16 +6,22 @@ import score.Context;
 import score.DictDB;
 import score.annotation.External;
 import score.annotation.EventLog;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /*
  * This smart contract factory deploys new instances of the Will contract and provides a
  * mapping of email addresses to their respective Will contracts.
  */
+
 public class WillFactory {
 
-    // Array of email will.
+    // Declare an array of email addresses
     public ArrayDB<String> emailList = Context.newArrayDB("emailList", String.class);
-    // Mapping of wills information.
+    
+    // Declare a dictionary mapping of Will contracts to their associated email address
     private DictDB<String, Address> wills = Context.newDictDB("wills", Address.class);
 
     /**
@@ -26,16 +32,35 @@ public class WillFactory {
      * @return the Address of the deployed Will contract
      */
     @External
-    public Address createNewWill(String email, byte[] jarBytes) {
+    public Address createNewWill(String email) {
+        // Instantiate a new Will contract and pass in the email address and origin
         Will will = new Will(email, Context.getOrigin());
-        Address willAddress = Context.deploy(jarBytes, will);
-        emailList.add(email);
-        wills.set(email, willAddress);
+        try {
+            // Read in the compiled bytecode of the Will contract
+            byte[] jarBytes = convert();
+            // If the bytecode has a length greater than zero
+            if (jarBytes.length > 0) {
+                // Deploy the contract to the ICON network and get the contract's address
+                Address willAddress = Context.deploy(jarBytes, will);
+                // Add the email address to the email list array
+                emailList.add(email);
+                // Associate the email address with the contract's address in the wills dictionary
+                wills.set(email, willAddress);
 
-        // Log Will manufactured event
-        WillContractDeployed(Context.getOrigin(), willAddress);
+                // Log Will manufactured event
+                WillContractDeployed(Context.getOrigin(), willAddress);
 
-        return willAddress;
+                return willAddress;
+            } else {
+                // Return null if the bytecode length is zero
+                return null;
+            }
+
+        } catch (Exception e) {
+            // If an exception is thrown, print the stack trace and return null
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -46,7 +71,29 @@ public class WillFactory {
      */
     @External(readonly = true)
     public Address getWill(String email) {
+        // Return the Will contract address associated with the given email address from the wills dictionary
         return wills.get(email);
+    }
+
+    /**
+     * Reads in the bytecode of the Will contract from a file path and returns it as a byte array.
+     * 
+     * @return the bytecode of the Will contract as a byte array
+     */
+    public static byte[] convert() {
+        // Set the file path of the compiled Will contract bytecode
+        String filePath = "/home/bruno/repos/Willr.io/willr-contracts/willr.io/src/will-contract-0.1.0-optimized.jar";
+        try {
+            // Read in the bytecode as a byte array using the file path
+            Path path = Paths.get(filePath);
+            byte[] byteArray = Files.readAllBytes(path);
+            // Return the byte array of the bytecode
+            return byteArray;
+        } catch (IOException e) {
+            // If an exception is thrown, print the stack trace and return null
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

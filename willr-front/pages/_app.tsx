@@ -4,9 +4,7 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 
-import { ConnectKitProvider } from "connectkit";
-import { WagmiConfig } from "wagmi";
-import { client } from "../utils/wagmi";
+import { IconConverter } from "icon-sdk-js";
 
 import PageChange from "../components/PageChange/PageChange";
 
@@ -48,18 +46,14 @@ export default class MyApp extends App {
 
     return (
       <React.Fragment>
-        <WagmiConfig client={client}>
-          <ConnectKitProvider>
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-              />
-              <title>Willr.io</title>
-            </Head>
-            <Component {...pageProps} />
-          </ConnectKitProvider>
-        </WagmiConfig>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+          <title>Willr.io</title>
+        </Head>
+        <Component {...pageProps} />
       </React.Fragment>
     );
   }

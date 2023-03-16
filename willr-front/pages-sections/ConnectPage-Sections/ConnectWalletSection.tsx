@@ -1,24 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-// @material-ui/core components
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "../../components/CustomButtons/Button";
-
-// core components
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
-
 import styles from "../../styles/jss/nextjs-material-kit/pages/connectSectionsStyle";
+import { checkUserHasContract, hasWalletExtension, connectWallet } from "../../utils/wallet-functions";
 
 const useStyles = makeStyles(styles);
 
 export default function ConnectWalletSection() {
   const classes = useStyles();
+  const [isConnecting, setIsConnecting] = useState(false);
+  const router = useRouter();
+
+  const handleConnectWallet = async () => {
+    if (hasWalletExtension()) {
+      try {
+        setIsConnecting(true);
+        const account = await connectWallet();
+
+        // check if user has a contract
+        const hasContract = await checkUserHasContract(account);
+        if (hasContract) {
+          router.push("/willapp");
+        } else {
+          router.push("/updatewill");
+        }
+        setIsConnecting(false);
+      } catch (error) {
+        // TODO Show handleConnectWallet erro alert
+        console.error(error);
+        setIsConnecting(false);
+      }
+    } else {
+      console.error("Web3 provider not found");
+    }
+  };
+
   return (
     <GridContainer justifyContent="center" align="center">
       <GridItem xs={12} md={5}>
         <img
-          alt="Connect Walle illustration"
+          alt="Connect Wallet illustration"
           src="/img/illustrations/connectWallet.svg"
           className={classes.imgFluid}
         />
@@ -39,12 +64,19 @@ export default function ConnectWalletSection() {
               </div>
             </GridItem>
             <GridItem>
-              <Link href="/updatewill" as="/updatewill">
-                <Button color={"primary"} className={classes.button}>
-                  <i className={`fa fa-sign-in-alt ${classes.icon}`} /> Connect
-                  Wallet
-                </Button>
-              </Link>
+              <Button
+                color={"primary"}
+                className={classes.button}
+                onClick={handleConnectWallet}
+                disabled={isConnecting}
+              >
+                {isConnecting ? (
+                  <i className={`fa fa-spinner fa-spin ${classes.icon}`} />
+                ) : (
+                  <i className={`fa fa-sign-in-alt ${classes.icon}`} />
+                )}
+                Connect Wallet
+              </Button>
             </GridItem>
           </GridContainer>
         </div>

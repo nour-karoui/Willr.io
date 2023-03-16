@@ -27,3 +27,5 @@ yarn-error.log*
 /dist
 /.next
 pnpm-lock.yaml
+
+/utils/will-contract-0.1.0-optimized.jar

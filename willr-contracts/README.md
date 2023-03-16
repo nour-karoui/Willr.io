@@ -49,12 +49,30 @@ Assuming you are running a local network that is listening on port 9082 for inco
 you can create a deploy transaction with the optimized jar and deploy it to the local network as follows.
 
 ```
-$ goloop rpc sendtx deploy ./hello-world/build/libs/hello-world-0.1.0-optimized.jar \
-    --uri http://localhost:9082/api/v3 \
-    --key_store <your_wallet_json> --key_password <password> \
-    --nid 3 --step_limit=1000000 \
+$GOLOOP_ROOT/bin/goloop rpc sendtx deploy ./willr.io/build/libs/willr.io-0.1.0-optimized.jar \
+    --uri https://lisbon.net.solidwallet.io/api/v3 \
+    --key_store /home/bruno/repos/Willr.io/willr-contracts/keystore.json --key_password gochain \
+    --nid 2 --step_limit 10000000000 \
     --content_type application/java \
-    --param name=Alice
+```
+
+```
+$GOLOOP_ROOT/bin/goloop rpc txresult 0xd1fd407ecc966cac12299ae2bebcbe36e946acb9a519390bbce43801c3d08dc7 \
+    --uri https://lisbon.net.solidwallet.io/api/v3
+{
+  "to": "cx0000000000000000000000000000000000000000",
+  "cumulativeStepUsed": "0x3d9b70f1",
+  "stepUsed": "0x3d9b70f1",
+  "stepPrice": "0x2e90edd00",
+  "eventLogs": [],
+  "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "status": "0x1",
+  "scoreAddress": "cxa285d67af4b7b2de70eab81ea0299a745c140698",
+  "blockHash": "0x212693eb694e0e5fa1ad87df76eacd4e2b62163e3983d223f71c5e821255b8b8",
+  "blockHeight": "0x1340c7e",
+  "txIndex": "0x1",
+  "txHash": "0xd1fd407ecc966cac12299ae2bebcbe36e946acb9a519390bbce43801c3d08dc7"
+}
 ```
 
 **[Note]** The content type should be `application/java` instead of `application/zip` to differentiate it with the Python SCORE deployment.

@@ -12,14 +12,18 @@ import score.annotation.EventLog;
  * This smart contract represents a will, which can hold digital assets and assign them
  * to specified beneficiaries.
  */
+
 public class Will {
 
     // Email address of the owner of the will.
     public String email;
+
     // Address of the owner of the will.
     public Address owner;
+    
     // Array of inheritors address.
     public ArrayDB<Address> inheritors = Context.newArrayDB("inheritors", Address.class);
+    
     // Mapping of inheritance information.
     public DictDB<Address, DigitalAsset[]> inherits = Context.newDictDB("inherits", DigitalAsset[].class);
 
@@ -74,7 +78,7 @@ public class Will {
         // Set the inheritance information for the beneficiary.
         inherits.set(inherit, assets);
         // Log the set inherit event.
-        InheritSet(this.owner, inherit, assets);
+        InheritSet(this.owner, inherit);
     }
 
     /**
@@ -110,7 +114,7 @@ public class Will {
                         asset.getTokenIdOrAmount());
             }
             // Log the sent inherit event.
-            InheritSent(this.owner, inherit, assets);
+            InheritSent(this.owner, inherit);
         }
         // Reset inheritors counting.
         inheritors = Context.newArrayDB("inheritors", Address.class);
@@ -123,11 +127,11 @@ public class Will {
     }
 
     @EventLog(indexed = 2)
-    public void InheritSet(Address owner, Address inherit, DigitalAsset[] assets) {
+    public void InheritSet(Address owner, Address inherit) {
     }
 
     @EventLog(indexed = 2)
-    public void InheritSent(Address owner, Address inherit, DigitalAsset[] assets) {
+    public void InheritSent(Address owner, Address inherit) {
     }
 
 }
