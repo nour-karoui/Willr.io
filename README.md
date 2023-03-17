@@ -53,7 +53,11 @@ To get started, just clone the repository go to the FrontEnd folder and run yarn
 
 ```
 git clone https://github.com/nour-karoui/Willr.io
+```
+```
 cd willr-front
+```
+```
 yarn add
 ```
 
@@ -73,13 +77,23 @@ Optimize the jar
 ./gradlew optimizedJar
 ```
 
-Deploy the optimized jar
+Deploy the optimized jar (This is just an example command, modify the values according to what you need and your file paths)
 ```
 $GOLOOP_ROOT/bin/goloop rpc sendtx deploy ./WillFactory/build/libs/willr.io-0.1.0-optimized.jar \
     --uri https://lisbon.net.solidwallet.io/api/v3 \
     --key_store <keystore.json_path> --key_password <gochain> \
     --nid 2 --step_limit 10000000000 \
     --content_type application/java \
+```
+
+Send transaction command (This is just an example command, modify the values according to what you need and your file paths)
+```
+ $GOLOOP_ROOT/bin/goloop rpc sendtx call --to cxd1f5d12e92459a4fcdf2678a14b572687471a70e \
+    --uri https://lisbon.net.solidwallet.io/api/v3 \
+    --key_store keystore.json --key_password gochain \
+    --nid 2 --step_limit 10000000000 \
+    --method setName \
+    --param name=Bob
 ```
 
 - Frontend
