@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch} from "react-redux";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -11,32 +13,37 @@ import CreateWillSection from "../pages-sections/ConnectPage-Sections/CreateWill
 
 import styles from "../styles/jss/nextjs-material-kit/pages/connectPage";
 
-import { checkUserHasContract, hasWalletExtension, checkWalletConnection } from "../utils/wallet-functions"
+import { RootState } from "../store/store";
+import { checkUserHasContract } from "../utils/wallet-functions"
+import { hasWalletExtension, checkWalletConnection } from "../functions"
 
 const useStyles = makeStyles(styles);
 
 export default function ConnectPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const [isConnected, setIsConnected] = useState(false);
+  const userHasWalletExtension = hasWalletExtension();
+
+  const isConnected = useSelector((state: RootState) => state.wallet.isConnected);
+  const account = useSelector((state: RootState) => state.wallet.account);
+
   const [hasContract, setHasContract] = useState(false);
 
-  const router = useRouter();
 
   useEffect(() => {
     async function checkConnection() {
-      if (hasWalletExtension()) {
+      if (userHasWalletExtension) {
         try {
           // Check if user is already connected
-          const { account, isConnected } = await checkWalletConnection();
-
-          setIsConnected(isConnected);
+          const connected  = await checkWalletConnection(dispatch, isConnected, account);
 
           // Check if user has a contract
-          if (isConnected) {
+          if (connected) {
             // Replace this with your contract factory logic to check if the user has a contract
-            const userHasContract = await checkUserHasContract(account.address);
+            const userHasContract = await checkUserHasContract(account);
             if (userHasContract) {
               setHasContract(userHasContract);
             } else {
@@ -55,7 +62,7 @@ export default function ConnectPage(props) {
   }, []);
 
   useEffect(() => {
-    if (hasContract) {
+    if (isConnected && hasContract) {
       // Navigate to willapp page if user has a contract
       router.push("/willapp");
     }
@@ -66,7 +73,7 @@ export default function ConnectPage(props) {
       <Header absolute color="white" brand="Willr.io" {...rest} />
       <div className={classes.pageHeader}>
         <div className={classes.container}>
-          {hasWalletExtension() ? (
+          {userHasWalletExtension ? (
             isConnected ? (
               <CreateWillSection />
             ) : (

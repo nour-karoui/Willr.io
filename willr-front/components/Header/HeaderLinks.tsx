@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch } from 'react-redux';
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,22 +14,23 @@ import Button from "../CustomButtons/Button";
 import styles from "../../styles/jss/nextjs-material-kit/components/headerLinksStyle";
 import { Typography } from "@material-ui/core";
 
-import { hasWalletExtension, disconnectWallet } from "../../utils/wallet-functions";
+import { hasWalletExtension, disconnectWallet } from '../../functions';
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinks() {
   const classes = useStyles();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleDisconnect = async () => {
     if (hasWalletExtension()) {
       try {
         // Disconnect the user
-        const isDisconnected = await disconnectWallet();
+        const isDisconnected = await disconnectWallet(dispatch);
         if (isDisconnected) {
           // Navigate to home page
-          router.push("/");
+          router.push("/landing");
         } else {
           // TODO Show Disconnect erro alert
         }

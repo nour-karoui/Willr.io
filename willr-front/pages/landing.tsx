@@ -48,7 +48,7 @@ export default function LandingPage(props) {
           image="/img/illustrations/backgroundPatternLanding.svg"
         >
           <div className={classes.container}>
-            <GridContainer justify="flex-start">
+            <GridContainer justifyContent="flex-start">
               <GridItem xs={12} sm={12} md={6}>
                 <h1 className={classes.title}>Willr</h1>
                 <h3>

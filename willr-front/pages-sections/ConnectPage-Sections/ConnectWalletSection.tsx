@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "../../components/CustomButtons/Button";
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
 import styles from "../../styles/jss/nextjs-material-kit/pages/connectSectionsStyle";
-import { checkUserHasContract, hasWalletExtension, connectWallet } from "../../utils/wallet-functions";
+import { RootState } from "../../store/store";
+import { checkUserHasContract } from "../../utils/wallet-functions";
+import { hasWalletExtension, connectWallet } from "../../functions";
 
 const useStyles = makeStyles(styles);
 
@@ -14,19 +18,23 @@ export default function ConnectWalletSection() {
   const classes = useStyles();
   const [isConnecting, setIsConnecting] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const account = useSelector((state: RootState) => state.wallet.account);
 
   const handleConnectWallet = async () => {
     if (hasWalletExtension()) {
+
       try {
         setIsConnecting(true);
-        const account = await connectWallet();
-
-        // check if user has a contract
-        const hasContract = await checkUserHasContract(account);
-        if (hasContract) {
-          router.push("/willapp");
+        if (await connectWallet(dispatch)) {
+          // check if user has a contract
+          const hasContract = await checkUserHasContract(account);
+          if (hasContract) {
+            router.push("/willapp");
+          }
         } else {
-          router.push("/updatewill");
+          // TODO Show handleConnectWallet erro alert
+          setIsConnecting(false);
         }
         setIsConnecting(false);
       } catch (error) {
@@ -36,6 +44,7 @@ export default function ConnectWalletSection() {
       }
     } else {
       console.error("Web3 provider not found");
+      setIsConnecting(false);
     }
   };
 

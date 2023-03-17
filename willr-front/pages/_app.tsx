@@ -1,60 +1,57 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
-
-import { IconConverter } from "icon-sdk-js";
-
+import { Provider } from "react-redux";
+import store from "../store/store";
 import PageChange from "../components/PageChange/PageChange";
 
 import "/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 
-Router.events.on("routeChangeStart", (url) => {
-  console.log(`Loading: ${url}`);
-  document.body.classList.add("body-page-transition");
-  ReactDOM.render(
-    <PageChange path={url} />,
-    document.getElementById("page-transition")
-  );
-});
-Router.events.on("routeChangeComplete", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
-Router.events.on("routeChangeError", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
+export default function MyApp({ Component, pageProps }) {
+  const [isPageTransitioning, setPageTransitioning] = useState(false);
 
-export default class MyApp extends App {
-  componentDidMount() {
-    let comment = document.createComment("Willr.io");
-    document.insertBefore(comment, document.documentElement);
-  }
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
+  useEffect(() => {
+    const handleRouteChangeStart = (url) => {
+      console.log(`Loading: ${url}`);
+      setPageTransitioning(true);
+    };
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
+    const handleRouteChangeComplete = () => {
+      setPageTransitioning(false);
+    };
 
-    return { pageProps };
-  }
-  render() {
-    const { Component, pageProps } = this.props;
+    const handleRouteChangeError = () => {
+      setPageTransitioning(false);
+    };
 
-    return (
-      <React.Fragment>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <title>Willr.io</title>
-        </Head>
+    Router.events.on("routeChangeStart", handleRouteChangeStart);
+    Router.events.on("routeChangeComplete", handleRouteChangeComplete);
+    Router.events.on("routeChangeError", handleRouteChangeError);
+
+    return () => {
+      Router.events.off("routeChangeStart", handleRouteChangeStart);
+      Router.events.off("routeChangeComplete", handleRouteChangeComplete);
+      Router.events.off("routeChangeError", handleRouteChangeError);
+    };
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>Willr.io</title>
+      </Head>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </React.Fragment>
-    );
-  }
+      </Provider>
+      {isPageTransitioning && (
+        <PageChange path={Router.asPath} />
+      )}
+    </React.Fragment>
+  );
 }
