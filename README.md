@@ -6,12 +6,12 @@
 
 The project is still under development and the next updates will focus on the following tasks:
 
-#### Contracts
+- Contracts
 
 - [ ] Deploy one contract from another, this .jar - bytes
 - [ ] Create Batch transactions
 
-#### Front end
+- Frontend
 
 - [ ] Connect ICONex wallet extention
 - [ ] Configure functions to send transaction
@@ -19,7 +19,7 @@ The project is still under development and the next updates will focus on the fo
 
 ## 💻 Installing
 
-### Contracts:
+- Contracts
 
 You need to install OpenJDK 11 version. Visit [OpenJDK.net](http://openjdk.java.net/) for prebuilt binaries.
 Or you can install a proper OpenJDK package from your OS vendors.
@@ -47,7 +47,7 @@ Verify installation
 $ go version
 ```
 
-### Front end:
+- Frontend
 
 To get started, just clone the repository go to the FrontEnd folder and run yarn add:
 
@@ -57,12 +57,9 @@ cd willr-front
 yarn add
 ```
 
-## 🚀 Installing Willr.io
-
-
 ## ☕ Using Willr.io
 
-### Contracts:
+- Contracts
 
 Check if you are in the contracts folder
 
@@ -85,7 +82,7 @@ $GOLOOP_ROOT/bin/goloop rpc sendtx deploy ./WillFactory/build/libs/willr.io-0.1.
     --content_type application/java \
 ```
 
-### Front end:
+- Frontend
 
 Check if you are in the frontend folder
 
