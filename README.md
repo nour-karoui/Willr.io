@@ -8,7 +8,7 @@ The project is still under development and the next updates will focus on the fo
 
 - Contracts
 
-- [ ] Deploy one contract from another, this .jar - bytes
+- [ ] Deploy one contract from another, .jar -> bytes
 - [ ] Create Batch transactions
 
 - Frontend
