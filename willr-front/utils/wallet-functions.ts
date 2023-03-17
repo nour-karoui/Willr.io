@@ -6,39 +6,13 @@ const CONTRACT_ABI = [
 ];
 
 /**
- * Check if the user has a contract in their wallet.
- * @param userAddress The user's Ethereum address.
- * @returns The contract address if found, otherwise null.
- */
-export async function checkUserHasContract(userAddress: string): Promise<boolean | null> {
-  if (typeof window === "undefined" || !window.ethereum) {
-    // Wallet not installed or not running
-    return null;
-  }
-
-  // const provider = new ethers.providers.Web3Provider(window.ethereum);
-  // const contractFactory = new ethers.Contract(CONTRACT_FACTORY_ADDRESS, CONTRACT_ABI, provider);
-
-  try {
-    // const contractAddress = await contractFactory.getUserContract(userAddress);
-    if (true) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
-
-/**
  * Checks if the user has a wallet extension installed in their browser.
  * @returns A boolean value indicating whether a wallet extension is installed.
  */
 export function hasWalletExtension(): boolean {
   // Check if the `window` object is defined and if it has an `ethereum` property
   // This indicates that a wallet extension is installed in the user's browser
+  console.log(window)
   return typeof window !== 'undefined' && window.ethereum !== undefined;
 }
 
@@ -117,4 +91,31 @@ export async function disconnectWallet(): Promise<boolean> {
 
   // If the `window` object or the `ethereum` property are undefined, there`s user connected, return true
   return true;
+}
+
+/**
+ * Check if the user has a contract in their wallet.
+ * @param userAddress The user's Ethereum address.
+ * @returns The contract address if found, otherwise null.
+ */
+export async function checkUserHasContract(userAddress: string): Promise<boolean | null> {
+  if (hasWalletExtension()) {
+    // Wallet not installed or not running
+    return null;
+  }
+
+  // const provider = new ethers.providers.Web3Provider(window.ethereum);
+  // const contractFactory = new ethers.Contract(CONTRACT_FACTORY_ADDRESS, CONTRACT_ABI, provider);
+
+  try {
+    // const contractAddress = await contractFactory.getUserContract(userAddress);
+    if (true) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

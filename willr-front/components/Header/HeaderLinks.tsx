@@ -30,9 +30,10 @@ export default function HeaderLinks(props) {
         if (isDisconnected) {
           // Navigate to home page
           router.push("/");
+        } else {
+          // TODO Show Disconnect erro alert
         }
       } catch (error) {
-        // TODO Show Disconnect erro alert
         console.error(error);
       }
     }
