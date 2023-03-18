@@ -1,4 +1,4 @@
-# Willr.io
+# Willr
 
 > Willr.io is a cutting-edge digital platform that offers users the peace of mind they need when it comes to managing and transferring their digital assets to future beneficiaries.
 
@@ -113,4 +113,4 @@ Do you want to be part of this project? Click [HERE](CONTRIBUTING.md) and read h
 
 This project is under license. See the [LICENSE](LICENSE.md) file for more details.
 
-[⬆ back to top](#project-name)<br>
+[⬆ Voltar ao topo](#willr)<br>
