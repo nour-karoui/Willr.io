@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface WalletState {
   account: string | null;
   isConnected: boolean;
+  hasContract: boolean, 
 }
 
 const initialState: WalletState = {
   account: null,
   isConnected: false,
+  hasContract: false, 
 };
 
 export const walletSlice = createSlice({
@@ -20,9 +22,12 @@ export const walletSlice = createSlice({
     setIsConnected: (state, action: PayloadAction<boolean>) => {
       state.isConnected = action.payload;
     },
+    setHasContract: (state, action: PayloadAction<boolean>) => {
+      state.hasContract = action.payload;
+    },
   },
 });
 
-export const { setAccount, setIsConnected } = walletSlice.actions;
+export const { setAccount, setIsConnected, setHasContract } = walletSlice.actions;
 
 export default walletSlice.reducer;

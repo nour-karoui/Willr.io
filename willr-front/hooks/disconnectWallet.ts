@@ -1,5 +1,5 @@
 import { hasWalletExtension } from './hasWalletExtension';
-import { setAccount, setIsConnected } from '../store/walletSlice';
+import { setAccount, setIsConnected, setHasContract } from '../store/walletSlice';
 
 /**
  * Disconnects the user from a wallet extension.
@@ -14,6 +14,7 @@ export async function disconnectWallet(dispatch): Promise<boolean> {
             // Update the redux state to reflect the disconnection
             dispatch(setAccount(null));
             dispatch(setIsConnected(false));
+            dispatch(setHasContract(false));
 
             // Return true to indicate successful disconnection
             return true;
@@ -25,5 +26,6 @@ export async function disconnectWallet(dispatch): Promise<boolean> {
     // If the `window` object or the `ethereum` property are undefined, there's no user connected, return true
     dispatch(setAccount(null));
     dispatch(setIsConnected(false));
+    dispatch(setHasContract(false));
     return true;
 }

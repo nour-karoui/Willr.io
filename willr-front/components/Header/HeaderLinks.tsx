@@ -14,7 +14,7 @@ import Button from "../CustomButtons/Button";
 import styles from "../../styles/jss/nextjs-material-kit/components/headerLinksStyle";
 import { Typography } from "@material-ui/core";
 
-import { hasWalletExtension, disconnectWallet } from '../../functions';
+import { hasWalletExtension, disconnectWallet } from '../../hooks';
 
 const useStyles = makeStyles(styles);
 

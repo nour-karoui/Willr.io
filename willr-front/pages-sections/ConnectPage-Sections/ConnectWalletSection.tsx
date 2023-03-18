@@ -9,8 +9,7 @@ import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from "../../components/Grid/GridItem";
 import styles from "../../styles/jss/nextjs-material-kit/pages/connectSectionsStyle";
 import { RootState } from "../../store/store";
-import { checkUserHasContract } from "../../utils/wallet-functions";
-import { hasWalletExtension, connectWallet } from "../../functions";
+import { hasWalletExtension, connectWallet, checkUserHasContract } from "../../hooks";
 
 const useStyles = makeStyles(styles);
 
@@ -19,6 +18,8 @@ export default function ConnectWalletSection() {
   const [isConnecting, setIsConnecting] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  
+  const isConnected = useSelector((state: RootState) => state.wallet.isConnected);
   const account = useSelector((state: RootState) => state.wallet.account);
 
   const handleConnectWallet = async () => {
@@ -28,7 +29,7 @@ export default function ConnectWalletSection() {
         setIsConnecting(true);
         if (await connectWallet(dispatch)) {
           // check if user has a contract
-          const hasContract = await checkUserHasContract(account);
+          const hasContract = await checkUserHasContract(isConnected, account, dispatch);
           if (hasContract) {
             router.push("/willapp");
           }

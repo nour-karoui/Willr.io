@@ -14,8 +14,9 @@ import CreateWillSection from "../pages-sections/ConnectPage-Sections/CreateWill
 import styles from "../styles/jss/nextjs-material-kit/pages/connectPage";
 
 import { RootState } from "../store/store";
-import { checkUserHasContract } from "../utils/wallet-functions"
-import { hasWalletExtension, checkWalletConnection } from "../functions"
+import { setHasContract } from '../store/walletSlice';
+
+import { hasWalletExtension, checkWalletConnection, checkUserHasContract } from "../hooks"
 
 const useStyles = makeStyles(styles);
 
@@ -29,8 +30,7 @@ export default function ConnectPage(props) {
 
   const isConnected = useSelector((state: RootState) => state.wallet.isConnected);
   const account = useSelector((state: RootState) => state.wallet.account);
-
-  const [hasContract, setHasContract] = useState(false);
+  const hasContract = useSelector((state: RootState) => state.wallet.hasContract);
 
 
   useEffect(() => {
@@ -38,14 +38,14 @@ export default function ConnectPage(props) {
       if (userHasWalletExtension) {
         try {
           // Check if user is already connected
-          const connected  = await checkWalletConnection(dispatch, isConnected, account);
+          const connected  = await checkWalletConnection(isConnected, account, dispatch);
 
           // Check if user has a contract
           if (connected) {
             // Replace this with your contract factory logic to check if the user has a contract
-            const userHasContract = await checkUserHasContract(account);
+            const userHasContract = await checkUserHasContract(isConnected, account, dispatch);
             if (userHasContract) {
-              setHasContract(userHasContract);
+              dispatch(setHasContract(userHasContract));
             } else {
               // TODO Show fetching contract erro alert
               console.log("Error fetching contract from account")
@@ -59,7 +59,7 @@ export default function ConnectPage(props) {
     }
 
     checkConnection();
-  }, []);
+  }, [isConnected, account, hasContract]);
 
   useEffect(() => {
     if (isConnected && hasContract) {

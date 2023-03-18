@@ -11,7 +11,7 @@ import { hasWalletExtension } from './hasWalletExtension';
 export async function checkWalletConnection(isConnected: boolean, account: string | null, dispatch: any): Promise<boolean> {
 
   // Define a function to check the wallet extension
-  const checkConnection = (async () => {
+  const checkConnection = async () => {
     if (hasWalletExtension()) {
       try {
         // Request the accounts from the wallet extension
@@ -36,8 +36,8 @@ export async function checkWalletConnection(isConnected: boolean, account: strin
       dispatch(setAccount(null));
       return false;
     }
-  }, [account, dispatch]);
+  };
 
   // Return a promise that resolves to a boolean value indicating if the user is connected and has an account
-  return Promise.resolve(isConnected && account !== null && checkConnection);
+  return Promise.resolve(isConnected && account !== null && checkConnection());
 };
