@@ -5,5 +5,5 @@
 export function hasWalletExtension(): boolean {
   // Check if the `window` object is defined and if it has an `ethereum` property
   // This indicates that a wallet extension is installed in the user's browser
-  return typeof window !== 'undefined' && window.ethereum !== undefined;
+  return typeof window !== "undefined" && window.icon !== undefined;
 }

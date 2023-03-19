@@ -14,7 +14,7 @@ import Button from "../CustomButtons/Button";
 import styles from "../../styles/jss/nextjs-material-kit/components/headerLinksStyle";
 import { Typography } from "@material-ui/core";
 
-import { hasWalletExtension, disconnectWallet } from '../../hooks';
+import { disconnectWallet } from '../../hooks';
 
 const useStyles = makeStyles(styles);
 
@@ -24,7 +24,6 @@ export default function HeaderLinks() {
   const dispatch = useDispatch();
 
   const handleDisconnect = async () => {
-    if (hasWalletExtension()) {
       try {
         // Disconnect the user
         const isDisconnected = await disconnectWallet(dispatch);
@@ -37,7 +36,6 @@ export default function HeaderLinks() {
       } catch (error) {
         console.error(error);
       }
-    }
   };
 
   return (

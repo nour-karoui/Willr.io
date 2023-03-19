@@ -34,6 +34,17 @@ const connectSectionsStyle = {
   inputIconsColor: {
     color: "#495057",
   },
+  buttonWrapper: {
+    marginTop: "2rem",
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  cancelButton: {
+    marginRight: "1rem",
+  },
+  connectModal:{
+    
+  }
 };
 
 export default connectSectionsStyle;

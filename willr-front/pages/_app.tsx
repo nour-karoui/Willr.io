@@ -49,9 +49,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
-      {isPageTransitioning && (
-        <PageChange path={Router.asPath} />
-      )}
+      {isPageTransitioning && <PageChange path={Router.asPath} />}
     </React.Fragment>
   );
 }
