@@ -8,8 +8,8 @@ dependencies {
 }
 
 optimizedJar {
-    mainClassName = 'com.iconloop.score.WillFactory'
-    archivesBaseName = 'willr.io'
+    mainClassName = 'com.iconloop.score.Will'
+    archivesBaseName = 'willrContract'
 }
 
 deployJar {

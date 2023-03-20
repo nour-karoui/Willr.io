@@ -42,7 +42,7 @@ export default function CreateWillSection() {
               </div>
             </GridItem>
             <GridItem>
-              <Link href="/updatewill" as="/updatewill">
+              <Link href="/createWill" as="/createWill">
                 <Button color={"primary"} className={classes.button}>
                   <i className={`fa fa-newspaper ${classes.icon}`} /> Create My
                   Will

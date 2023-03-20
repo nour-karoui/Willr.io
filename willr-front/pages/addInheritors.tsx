@@ -7,14 +7,13 @@ import Header from "../components/Header/Header";
 import GridContainer from "../components/Grid/GridContainer";
 import GridItem from "../components/Grid/GridItem";
 // Page sections
-import EmailWillSection from "../pages-sections/UpdatePage-Sections/EmailWillSection";
 import AddAssetSection from "../pages-sections/UpdatePage-Sections/AddAssetSection";
 
 import styles from "../styles/jss/nextjs-material-kit/pages/updateWillPage";
 
 const useStyles = makeStyles(styles);
 
-export default function UpdateWillPage(props) {
+export default function addInheritors(props) {
   const classes = useStyles();
   const { ...rest } = props;
   return (
@@ -32,8 +31,7 @@ export default function UpdateWillPage(props) {
         <div className={classes.container}>
           <GridContainer justifyContent="center">
             <GridItem xs={12} md={8} lg={6}>
-              <EmailWillSection />
-              {/* <AddAssetSection /> */}
+              <AddAssetSection />
             </GridItem>
           </GridContainer>
         </div>

@@ -1,11 +1,4 @@
-import { RootState } from "../store/store";
-import {
-  setPrivKey,
-  setPubKey,
-  setAddress,
-  setIsConnected,
-  setUserContract,
-} from "../store/walletSlice";
+import { setUserContract } from "../store/walletSlice";
 
 import IconService from "icon-sdk-js";
 
@@ -15,10 +8,10 @@ import IconService from "icon-sdk-js";
  * @returns
  */
 export async function checkUserHasContract(
-  _userAddress: string,
+  checkUserAddress: string,
   dispatch: any
 ): Promise<boolean> {
-  //Create an instance of IconService.
+  // Create an instance of IconService.
   const iconService = new IconService(
     new IconService.HttpProvider("https://lisbon.net.solidwallet.io/api/v3")
   );
@@ -26,11 +19,11 @@ export async function checkUserHasContract(
   const call = new IconService.IconBuilder.CallBuilder()
     .to("cx91f29280157d5ff4a08958c147bad870c08c649b")
     .method("getWill")
-    .params({ userAddress: _userAddress })
+    .params({ userAddress: checkUserAddress })
     .build();
   // Execute the call
   const contractAddress = await iconService.call(call).execute();
-  console.log("contractAddress:", contractAddress);
+  console.log("Check user has contract:", contractAddress);
   if (contractAddress) {
     dispatch(setUserContract(contractAddress));
     return true;
